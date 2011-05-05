@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More tests => 72;
 
-use_ok('Hash::Validator::Field');
+use_ok('Input::Validator::Field');
 
-my $field = Hash::Validator::Field->new(name => 'foo');
+my $field = Input::Validator::Field->new(name => 'foo');
 $field->required(1);
 $field->length([3, 20]);
 $field->regexp(qr/^\d+$/);
@@ -35,7 +35,7 @@ $field->value(123);
 ok($field->is_valid);
 ok(!$field->error);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->length([3, 20]);
 
 ok($field->is_valid);
@@ -49,7 +49,7 @@ $field->value('abc');
 ok($field->is_valid);
 ok(!$field->error);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->length([3, 20]);
 
 $field->value([qw/fo bar/]);
@@ -67,13 +67,13 @@ $field->value([qw/foo ba/]);
 is_deeply($field->value, [qw/foo ba/]);
 ok(!$field->is_valid);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(1);
 $field->value([]);
 is_deeply($field->value, []);
 ok($field->is_valid);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(1);
 $field->value([]);
 $field->required(1);
@@ -84,7 +84,7 @@ $field->value([qw/foo bar/]);
 is_deeply($field->value, [qw/foo bar/]);
 ok($field->is_valid);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->required(1)->in(0, 1);
 ok(!$field->is_defined);
 ok($field->is_empty);
@@ -95,7 +95,7 @@ ok($field->is_defined);
 ok(!$field->is_empty);
 ok($field->is_valid);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(2, 3);
 $field->value([qw/foo/]);
 ok(!$field->is_valid);
@@ -111,7 +111,7 @@ $field->value([qw/foo bar baz urgh/]);
 ok(!$field->is_valid);
 is($field->error, 'TOO_MUCH');
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(2);
 $field->value([qw/foo/]);
 ok(!$field->is_valid);
@@ -125,32 +125,32 @@ ok(!$field->is_valid);
 is($field->error, 'TOO_MUCH');
 
 # Multiple constraints
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(1, 10);
 $field->unique;
 $field->value([qw/1 2 3 4 5/]);
 ok($field->is_valid);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(1, 10);
 $field->unique;
 $field->value([qw/1 2 3 4 4/]);
 ok(!$field->is_valid);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(1, 10);
 $field->equal;
 $field->value([qw/1 1 1 1 1/]);
 ok($field->is_valid);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(1, 10);
 $field->equal;
 $field->value([qw/1 1 2 1 1/]);
 ok(!$field->is_valid);
 
 # Custom error messages
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->length([3, 20]);
 $field->message(
     'Name can have between %s and %s characters, you entered %s!');
@@ -161,7 +161,7 @@ is($field->error,
     'Name can have between 3 and 20 characters, you entered 2!');
 
 # inflate
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->inflate(sub { $_ = 'inflate' });
 $field->value('raw');
 ok($field->is_valid);
@@ -173,7 +173,7 @@ $field->value([qw/foo bar/]);
 ok($field->is_valid);
 is_deeply($field->value, [qw/foo baz/]);
 
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->multiple(1);
 $field->regexp(qr/^\d+$/);
 
@@ -188,7 +188,7 @@ ok($field->is_valid);
 is_deeply($field->value, [qw/10020030/]);
 
 # deflate
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->deflate(sub { $_ = 'deflate' });
 $field->value('raw');
 ok($field->is_valid);
@@ -208,7 +208,7 @@ ok($field->is_valid);
 is_deeply($field->value, [qw/10 20 30/]);
 
 # inflate/deflate
-$field = Hash::Validator::Field->new(name => 'foo');
+$field = Input::Validator::Field->new(name => 'foo');
 $field->inflate(sub { s/bar/baz/; $_ });
 $field->deflate(sub { s/baz/foo/; $_ });
 $field->value('bar');

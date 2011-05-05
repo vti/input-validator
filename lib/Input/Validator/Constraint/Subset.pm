@@ -1,9 +1,9 @@
-package Hash::Validator::Constraint::Subset;
+package Input::Validator::Constraint::Subset;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Constraint';
+use base 'Input::Validator::Constraint';
 
 sub is_valid {
     my ($self, $values) = @_;
@@ -22,7 +22,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::Constraint::Subset - Subset constraint
+Input::Validator::Constraint::Subset - Subset constraint
 
 =head1 SYNOPSIS
 
@@ -40,6 +40,6 @@ Validates the constraint.
 
 =head1 SEE ALSO
 
-L<Hash::Validator>, L<Hash::Constraint>
+L<Input::Validator>, L<Input::Constraint>
 
 =cut

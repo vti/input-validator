@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More tests => 13;
 
-use Hash::Validator::Constraint::Ip;
+use Input::Validator::Constraint::Ip;
 
-my $constraint = Hash::Validator::Constraint::Ip->new;
+my $constraint = Input::Validator::Constraint::Ip->new;
 
 ok($constraint);
 
@@ -23,7 +23,7 @@ ok($constraint->is_valid('192.168.2.1'));
 
 ok($constraint->is_valid('255.0.0.255'));
 
-$constraint = Hash::Validator::Constraint::Ip->new(args => [noprivate => 1]);
+$constraint = Input::Validator::Constraint::Ip->new(args => [noprivate => 1]);
 
 ok(!$constraint->is_valid('127.0.0.1'));
 ok(!$constraint->is_valid('10.0.1.2'));

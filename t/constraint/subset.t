@@ -5,10 +5,10 @@ use warnings;
 
 use Test::More tests => 9;
 
-use Hash::Validator::Constraint::Subset;
+use Input::Validator::Constraint::Subset;
 
 my $constraint =
-  Hash::Validator::Constraint::Subset->new(args => [1, 5, 7]);
+  Input::Validator::Constraint::Subset->new(args => [1, 5, 7]);
 
 ok($constraint);
 

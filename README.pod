@@ -1,6 +1,6 @@
-=head1 Hash::Validator
+=head1 Input::Validator
 
-    my $validator = Hash::Validator->new;
+    my $validator = Input::Validator->new;
 
     # Fields
     $validator->field('phone')->required(1)->regexp(qr/^\d+$/);

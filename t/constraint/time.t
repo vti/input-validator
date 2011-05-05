@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More tests => 9;
 
-use Hash::Validator::Constraint::Time;
+use Input::Validator::Constraint::Time;
 
-my $constraint = Hash::Validator::Constraint::Time->new(args => [split => ':']);
+my $constraint = Input::Validator::Constraint::Time->new(args => [split => ':']);
 
 ok($constraint);
 

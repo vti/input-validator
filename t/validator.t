@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More tests => 16;
 
-use Hash::Validator;
+use Input::Validator;
 
-my $validator = Hash::Validator->new;
+my $validator = Input::Validator->new;
 $validator->field('firstname')->required(1);
 $validator->field('website')->length(3, 20);
 
@@ -30,24 +30,24 @@ is_deeply($validator->values, {});
 ok(!$validator->validate({firstname => 'foo', website => '12'}));
 is_deeply($validator->values, {firstname => 'foo'});
 
-$validator = Hash::Validator->new;
+$validator = Input::Validator->new;
 $validator->field('foo')->in(0, 1);
 ok($validator->validate({foo => 0}));
 
-$validator = Hash::Validator->new;
+$validator = Input::Validator->new;
 $validator->field('firstname')->each(sub { shift->required(1) });
 ok($validator->validate({firstname => 'foo'}));
 
-$validator = Hash::Validator->new(messages => {REQUIRED => 'Required!'});
+$validator = Input::Validator->new(messages => {REQUIRED => 'Required!'});
 $validator->field('firstname')->required(1);
 ok(!$validator->validate());
 is($validator->errors->{firstname}, 'Required!');
 
-$validator = Hash::Validator->new;
+$validator = Input::Validator->new;
 $validator->field('firstname');
 ok($validator->validate({firstname => ''}));
 is_deeply($validator->values, {firstname => ''});
 
-$validator = Hash::Validator->new;
+$validator = Input::Validator->new;
 $validator->field('tags')->multiple(1, 10);
 ok($validator->validate({}));

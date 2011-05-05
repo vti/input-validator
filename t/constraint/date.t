@@ -5,10 +5,10 @@ use warnings;
 
 use Test::More tests => 5;
 
-use Hash::Validator::Constraint::Date;
+use Input::Validator::Constraint::Date;
 
 my $constraint =
-  Hash::Validator::Constraint::Date->new(args => [split => qr/\//]);
+  Input::Validator::Constraint::Date->new(args => [split => qr/\//]);
 
 ok($constraint);
 

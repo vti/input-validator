@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More tests => 8;
 
-use Hash::Validator;
+use Input::Validator;
 
-my $validator = Hash::Validator->new;
+my $validator = Input::Validator->new;
 
 $validator->field([qw/foo bar baz/])->each(sub { shift->regexp(qr/^\d+$/) });
 
@@ -18,7 +18,7 @@ ok(!$validator->validate({foo => 'a', bar => 'b', baz => 'c'}));
 
 
 # Custom errors bulk
-$validator = Hash::Validator->new;
+$validator = Input::Validator->new;
 $validator->field([qw/foo bar/])->each(
     sub {
         shift->length(3, 20)

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 package CustomConstraint;
-use base 'Hash::Validator::Constraint::In';
+use base 'Input::Validator::Constraint::In';
 
 package main;
 
@@ -10,12 +10,12 @@ use warnings;
 
 use Test::More tests => 4;
 
-use Hash::Validator::ConstraintBuilder;
+use Input::Validator::ConstraintBuilder;
 
-my $constraint = Hash::Validator::ConstraintBuilder->build('in');
+my $constraint = Input::Validator::ConstraintBuilder->build('in');
 ok($constraint);
-ok($constraint->isa('Hash::Validator::Constraint::In'));
+ok($constraint->isa('Input::Validator::Constraint::In'));
 
-$constraint = Hash::Validator::ConstraintBuilder->build('CustomConstraint');
+$constraint = Input::Validator::ConstraintBuilder->build('CustomConstraint');
 ok($constraint);
 ok($constraint->isa('CustomConstraint'));

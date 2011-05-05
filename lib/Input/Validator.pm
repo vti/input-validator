@@ -1,16 +1,16 @@
-package Hash::Validator;
+package Input::Validator;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Base';
+use base 'Input::Validator::Base';
 
 our $VERSION = '0.001001';
 
-use Hash::Validator::Bulk;
-use Hash::Validator::Condition;
-use Hash::Validator::Field;
-use Hash::Validator::Group;
+use Input::Validator::Bulk;
+use Input::Validator::Condition;
+use Input::Validator::Field;
+use Input::Validator::Group;
 
 require Carp;
 
@@ -41,7 +41,7 @@ sub field {
 
     my $fields = [];
     foreach my $name (@names) {
-        my $field = Hash::Validator::Field->new(
+        my $field = Input::Validator::Field->new(
             name     => $name,
             messages => $self->{messages},
             explicit => $self->{explicit},
@@ -53,13 +53,13 @@ sub field {
 
     return $self->{fields}->{$names[0]} if @names == 1;
 
-    return Hash::Validator::Bulk->new(fields => $fields);
+    return Input::Validator::Bulk->new(fields => $fields);
 }
 
 sub when {
     my $self = shift;
 
-    my $cond = Hash::Validator::Condition->new->when(@_);
+    my $cond = Input::Validator::Condition->new->when(@_);
 
     push @{$self->{conditions}}, $cond;
 
@@ -78,7 +78,7 @@ sub group {
 
     $fields = [map { $self->{fields}->{$_} } @$fields];
 
-    my $group = Hash::Validator::Group->new(name => $name, fields => $fields);
+    my $group = Input::Validator::Group->new(name => $name, fields => $fields);
     push @{$self->{groups}}, $group;
 
     return $group;
@@ -226,11 +226,11 @@ __END__
 
 =head1 NAME
 
-Hash::Validator - Hash Validator
+Input::Validator - Input Validator
 
 =head1 SYNOPSIS
 
-    my $validator = Hash::Validator->new;
+    my $validator = Input::Validator->new;
 
     # Fields
     $validator->field('phone')->required(1)->regexp(qr/^\d+$/);
@@ -306,7 +306,7 @@ Unknown parameters exist in validated parameter hashref.
 =head2 C<messages>
 
     my $validator =
-      Hash::Validator->new(
+      Input::Validator->new(
         messages => {REQUIRED => 'This field is required'});
 
 Replace default messages.
@@ -319,9 +319,9 @@ Trim field values. B<ON> by default.
 
 =head2 C<new>
 
-    my $validator = Hash::Validator->new;
+    my $validator = Input::Validator->new;
 
-Create a new L<Hash::Validator> object.
+Create a new L<Input::Validator> object.
 
 =head2 C<clear_errors>
 
@@ -331,16 +331,16 @@ Clear errors.
 
 =head2 C<field>
 
-    $validator->field('foo');               # Hash::Validator::Field object is returned
+    $validator->field('foo');               # Input::Validator::Field object is returned
     $validator->field('foo');               # Already created field object is returned
 
-    $validator->field(qw/foo bar baz/);     # Hash::Validator::Bulk object is returned
-    $validator->field([qw/foo bar baz/]);   # Hash::Validator::Bulk object is returned
+    $validator->field(qw/foo bar baz/);     # Input::Validator::Bulk object is returned
+    $validator->field([qw/foo bar baz/]);   # Input::Validator::Bulk object is returned
 
-When a single value is passed create L<Hash::Validator::Field> object or
+When a single value is passed create L<Input::Validator::Field> object or
 return an already created field object.
 
-When an array or an array reference is passed return L<Hash::Validator::Bulk> object. You can
+When an array or an array reference is passed return L<Input::Validator::Bulk> object. You can
 call C<each> method to apply setting to multiple fields.
 
     $validator->field(qw/foo bar baz/)->each(sub { shift->required(1) });
@@ -371,7 +371,7 @@ whatever you want in condition's callback. Validation will be remade.
     $validator->validate({a => ['b', 'c'], b => 'd'});
 
 Accept and validate a hash reference that represents data that is being
-validated. Hash values can be either a C<SCALAR> value or an C<ARRAREF> value,
+validated. Input values can be either a C<SCALAR> value or an C<ARRAREF> value,
 which means that a field has multiple values. In case of an array reference, it
 is checked if a field can have multiple values. Otherwise only the first value
 is accepted and returned when C<values> method is called.

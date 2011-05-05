@@ -1,4 +1,4 @@
-package Hash::Validator::Base;
+package Input::Validator::Base;
 
 use strict;
 use warnings;

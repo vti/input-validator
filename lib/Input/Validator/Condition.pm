@@ -1,11 +1,11 @@
-package Hash::Validator::Condition;
+package Input::Validator::Condition;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Base';
+use base 'Input::Validator::Base';
 
-use Hash::Validator::ConstraintBuilder;
+use Input::Validator::ConstraintBuilder;
 
 sub BUILD {
     my $self = shift;
@@ -42,7 +42,7 @@ sub then {
 sub constraint {
     my $self = shift;
 
-    my $constraint = Hash::Validator::ConstraintBuilder->build(@_);
+    my $constraint = Input::Validator::ConstraintBuilder->build(@_);
 
     my $bulk = $self->{bulks}->[-1];
     push @{$bulk->{constraints}}, $constraint;
@@ -90,7 +90,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::Condition - Condition object
+Input::Validator::Condition - Condition object
 
 =head1 SYNOPSIS
 
@@ -145,6 +145,6 @@ Adds fields which values are checked to match the condition.
 
 =head1 SEE ALSO
 
-L<Hash::Validator>, L<Hash::Validator::Field>, L<Hash::Validator::Constraint>
+L<Input::Validator>, L<Input::Validator::Field>, L<Input::Validator::Constraint>
 
 =cut

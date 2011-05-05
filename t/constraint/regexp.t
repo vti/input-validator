@@ -5,10 +5,10 @@ use warnings;
 
 use Test::More tests => 4;
 
-use Hash::Validator::Constraint::Regexp;
+use Input::Validator::Constraint::Regexp;
 
 my $constraint =
-  Hash::Validator::Constraint::Regexp->new(args => qr/^[a-z]+$/);
+  Input::Validator::Constraint::Regexp->new(args => qr/^[a-z]+$/);
 
 ok($constraint);
 

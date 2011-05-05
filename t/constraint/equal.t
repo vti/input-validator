@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More tests => 5;
 
-use Hash::Validator::Constraint::Equal;
+use Input::Validator::Constraint::Equal;
 
-my $constraint = Hash::Validator::Constraint::Equal->new;
+my $constraint = Input::Validator::Constraint::Equal->new;
 
 ok($constraint);
 

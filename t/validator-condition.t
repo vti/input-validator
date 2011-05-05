@@ -3,11 +3,11 @@
 use strict;
 use warnings;
 
-use Hash::Validator;
+use Input::Validator;
 
 use Test::More tests => 6;
 
-my $validator = Hash::Validator->new;
+my $validator = Input::Validator->new;
 $validator->field([qw/foo bar/])->each(sub { shift->length(1, 3) });
 
 $validator->when('bar')->regexp(qr/^\d+$/)

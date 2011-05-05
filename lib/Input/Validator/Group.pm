@@ -1,11 +1,11 @@
-package Hash::Validator::Group;
+package Input::Validator::Group;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Base';
+use base 'Input::Validator::Base';
 
-use Hash::Validator::ConstraintBuilder;
+use Input::Validator::ConstraintBuilder;
 
 sub BUILD {
     my $self = shift;
@@ -42,7 +42,7 @@ sub equal  { shift->constraint('equal') }
 sub constraint {
     my $self = shift;
 
-    my $constraint = Hash::Validator::ConstraintBuilder->build(@_);
+    my $constraint = Input::Validator::ConstraintBuilder->build(@_);
 
     push @{$self->{constraints}}, $constraint;
 
@@ -75,7 +75,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::Group - Run constraint on group of fields
+Input::Validator::Group - Run constraint on group of fields
 
 =head1 SYNOPSIS
 

@@ -1,9 +1,9 @@
-package Hash::Validator::Constraint;
+package Input::Validator::Constraint;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Base';
+use base 'Input::Validator::Base';
 
 use String::CamelCase ();
 
@@ -35,7 +35,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::Constraint - Basic condition class
+Input::Validator::Constraint - Basic condition class
 
 =head1 SYNOPSIS
 

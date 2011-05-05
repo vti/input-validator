@@ -1,4 +1,4 @@
-package Hash::Validator::ConstraintBuilder;
+package Input::Validator::ConstraintBuilder;
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ sub build {
     my $class =
         $name =~ m/[A-Z]/
       ? $name
-      : "Hash::Validator::Constraint::"
+      : "Input::Validator::Constraint::"
       . String::CamelCase::camelize($name);
 
     Class::Load::load_class($class);
@@ -26,7 +26,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::ConstraintBuilder - Constraint factory
+Input::Validator::ConstraintBuilder - Constraint factory
 
 =head1 SYNOPSIS
 
@@ -40,7 +40,7 @@ A factory class for constraints. Build a new object.
 
 =head2 C<build>
 
-    Hash::Validator::ConstraintBuilder->build('length' => [1, 3]);
+    Input::Validator::ConstraintBuilder->build('length' => [1, 3]);
 
 Build a new constraint object passing all additional parameters.
 

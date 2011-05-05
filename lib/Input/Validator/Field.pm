@@ -1,12 +1,12 @@
-package Hash::Validator::Field;
+package Input::Validator::Field;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Base';
+use base 'Input::Validator::Base';
 
-use Hash::Validator::Bulk;
-use Hash::Validator::ConstraintBuilder;
+use Input::Validator::Bulk;
+use Input::Validator::ConstraintBuilder;
 
 our $AUTOLOAD;
 
@@ -84,7 +84,7 @@ sub error {
 sub constraint {
     my $self = shift;
 
-    my $constraint = Hash::Validator::ConstraintBuilder->build(@_);
+    my $constraint = Input::Validator::ConstraintBuilder->build(@_);
 
     push @{$self->{constraints}}, $constraint;
 
@@ -213,7 +213,7 @@ sub clear_value {
 sub each {
     my $self = shift;
 
-    my $bulk = Hash::Validator::Bulk->new(fields => [$self]);
+    my $bulk = Input::Validator::Bulk->new(fields => [$self]);
     return $bulk->each(@_);
 }
 
@@ -254,7 +254,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::Field - Field object
+Input::Validator::Field - Field object
 
 =head1 SYNOPSIS
 
@@ -289,7 +289,7 @@ Field error.
 
     $field->each(sub { shift->required(1) });
 
-Each method as described in L<Hash::Validator::Bulk>. Added here for
+Each method as described in L<Input::Validator::Bulk>. Added here for
 convenience.
 
 =head2 C<inflate>
@@ -326,7 +326,7 @@ Field's name.
 
     $field->required(1);
 
-Whether field is required or not. See L<Hash::Validator> documentation what is
+Whether field is required or not. See L<Input::Validator> documentation what is
 an empty field.
 
 =head2 C<trim>
@@ -391,6 +391,6 @@ Set or get field's value.
 
 =head1 SEE ALSO
 
-L<Hash::Validator>, L<Hash::Validator::Constraint>.
+L<Input::Validator>, L<Input::Validator::Constraint>.
 
 =cut

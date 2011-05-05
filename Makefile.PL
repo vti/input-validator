@@ -12,8 +12,8 @@ use ExtUtils::MakeMaker;
 my ($mm) = $ExtUtils::MakeMaker::VERSION =~ /^([^_]+)/;
 
 WriteMakefile(
-    NAME         => 'Hash::Validator',
-    VERSION_FROM => 'lib/Hash/Validator.pm',
+    NAME         => 'Input::Validator',
+    VERSION_FROM => 'lib/Input/Validator.pm',
     ABSTRACT     => 'Data validator',
     AUTHOR       => 'Viacheslav Tykhanovskyi <vti@cpan.org>',
 
@@ -25,7 +25,7 @@ WriteMakefile(
                 requires  => {perl => '5.008007'},
                 resources => {
                     license    => 'http://dev.perl.org/licenses/',
-                    repository => 'http://github.com/vti/hash-validator'
+                    repository => 'http://github.com/vti/input-validator'
                 },
                 no_index => {directory => [qw/t/]}
             },

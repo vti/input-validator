@@ -1,9 +1,9 @@
-package Hash::Validator::Bulk;
+package Input::Validator::Bulk;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Base';
+use base 'Input::Validator::Base';
 
 sub BUILD {
     my $self = shift;
@@ -29,7 +29,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::Bulk - Internal object for multiple fields processing
+Input::Validator::Bulk - Internal object for multiple fields processing
 
 =head1 SYNOPSIS
 
@@ -37,7 +37,7 @@ Hash::Validator::Bulk - Internal object for multiple fields processing
 
 =head1 DESCRIPTION
 
-Bulk object. Holds multiple fields that were created by L<Hash::Validator>.
+Bulk object. Holds multiple fields that were created by L<Input::Validator>.
 
 =head1 METHODS
 
@@ -49,6 +49,6 @@ Every field is passed to this callback as the first parameter.
 
 =head1 SEE ALSO
 
-L<Hash::Validator>
+L<Input::Validator>
 
 =cut

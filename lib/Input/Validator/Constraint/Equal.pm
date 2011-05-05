@@ -1,9 +1,9 @@
-package Hash::Validator::Constraint::Equal;
+package Input::Validator::Constraint::Equal;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Constraint';
+use base 'Input::Validator::Constraint';
 
 sub is_multiple {1}
 
@@ -26,7 +26,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::Constraint::Equal - Equal constraint
+Input::Validator::Constraint::Equal - Equal constraint
 
 =head1 SYNOPSIS
 
@@ -45,6 +45,6 @@ Validates the constraint.
 
 =head1 SEE ALSO
 
-L<Hash::Validator>, L<Hash::Constraint>
+L<Input::Validator>, L<Input::Constraint>
 
 =cut

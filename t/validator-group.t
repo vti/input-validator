@@ -5,16 +5,16 @@ use warnings;
 
 use Test::More tests => 16;
 
-use Hash::Validator;
+use Input::Validator;
 
-my $validator = Hash::Validator->new;
+my $validator = Input::Validator->new;
 
 $validator->field('password')->required(1);
 $validator->field('confirm_password')->required(1);
 
 my $p = $validator->group('passwords' => [qw/password confirm_password/])->equal;
 
-isa_ok($p, 'Hash::Validator::Group');
+isa_ok($p, 'Input::Validator::Group');
 is($p, $validator->group('passwords'), 'get group');
 
 ok(!$validator->validate({}));
@@ -30,7 +30,7 @@ is_deeply($validator->errors, {passwords => 'EQUAL_CONSTRAINT_FAILED'});
 ok($validator->validate({password => 'foo', confirm_password => 'foo'}));
 is_deeply($validator->errors, {});
 
-$validator = Hash::Validator->new;
+$validator = Input::Validator->new;
 $validator->field([qw/foo bar/]);
 $validator->group('all_or_none' => [qw/foo bar/])->equal;
 ok($validator->validate({}));

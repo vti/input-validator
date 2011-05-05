@@ -1,9 +1,9 @@
-package Hash::Validator::Constraint::Email;
+package Input::Validator::Constraint::Email;
 
 use strict;
 use warnings;
 
-use base 'Hash::Validator::Constraint';
+use base 'Input::Validator::Constraint';
 
 use constant NAME_MAX_LENGTH   => 64;
 use constant DOMAIN_MAX_LENGTH => 255;
@@ -31,7 +31,7 @@ __END__
 
 =head1 NAME
 
-Hash::Validator::Constraint::Email - Email constraint
+Input::Validator::Constraint::Email - Email constraint
 
 =head1 SYNOPSIS
 
@@ -51,6 +51,6 @@ Validates the constraint.
 
 =head1 SEE ALSO
 
-L<Hash::Validator>, L<Hash::Constraint>
+L<Input::Validator>, L<Input::Constraint>
 
 =cut
