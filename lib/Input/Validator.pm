@@ -406,7 +406,7 @@ are ignored.
 
 =head2 Repository
 
-    http://github.com/vti/hash-validator
+    http://github.com/vti/input-validator
 
 =head1 AUTHOR
 
