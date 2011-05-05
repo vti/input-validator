@@ -4,3 +4,4 @@
 ^Makefile$
 ^\.git
 tar.gz$
+README.pod
