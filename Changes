@@ -1,5 +1,9 @@
 Revision history for perl module Input::Validator
 
+0.001002 2011-05-26
+
+ - Fixed conditions inflate bug (found by Alex Voronov)
+
 0.001001 2011-05-05
 
  - Initial release

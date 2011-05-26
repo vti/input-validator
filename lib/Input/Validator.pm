@@ -5,7 +5,7 @@ use warnings;
 
 use base 'Input::Validator::Base';
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 use Input::Validator::Bulk;
 use Input::Validator::Condition;
