@@ -22,16 +22,19 @@ $validator = Input::Validator->new;
 $validator->field([qw/foo bar/])->each(
     sub {
         shift->length(3, 20)
-          ->message('Name can have between %s and %s characters, you entered %s!')
+          ->messages(LENGTH_CONSTRAINT_FAILED =>
+              'Name can have between %s and %s characters, you entered %s!');
     }
 );
 
 my $field = $validator->field('foo');
 $field->value('Hi');
 ok(!$field->is_valid);
-is($field->error, 'Name can have between 3 and 20 characters, you entered 2!');
+is($field->error,
+    'Name can have between 3 and 20 characters, you entered 2!');
 
 $field = $validator->field('bar');
 $field->value('Hi');
 ok(!$field->is_valid);
-is($field->error, 'Name can have between 3 and 20 characters, you entered 2!');
+is($field->error,
+    'Name can have between 3 and 20 characters, you entered 2!');

@@ -152,8 +152,8 @@ ok(!$field->is_valid);
 # Custom error messages
 $field = Input::Validator::Field->new(name => 'foo');
 $field->length([3, 20]);
-$field->message(
-    'Name can have between %s and %s characters, you entered %s!');
+$field->messages(LENGTH_CONSTRAINT_FAILED =>
+      'Name can have between %s and %s characters, you entered %s!');
 
 $field->value('Hi');
 ok(!$field->is_valid);

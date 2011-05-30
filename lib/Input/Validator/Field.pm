@@ -91,24 +91,27 @@ sub constraint {
     return $self;
 }
 
-sub message {
-    my $self    = shift;
-    my $message = shift;
+sub messages {
+    my $self = shift;
 
-    $self->{message} = $message if defined $message;
+    return $self->{messages} unless @_;
+
+    my @messages = @_ == 1 ? %{$_[0]} : @_;
+
+    $self->{messages} = {@messages};
 
     return $self;
-
 }
 
-sub _message {
-    my $self    = shift;
-    my $message = shift;
-    my $params  = shift || [];
+sub error_to_message {
+    my $self   = shift;
+    my $error  = shift;
+    my $params = shift || [];
 
-    return sprintf($self->{message}, @$params) if $self->{message};
+    my $message = $self->{messages}->{$error};
+    $message = $error unless defined $message;
 
-    return $self->{messages}->{$message} || $message;
+    return sprintf($message, @$params);
 }
 
 sub multiple {
@@ -152,7 +155,7 @@ sub is_valid {
 
     $self->error('');
 
-    $self->error($self->_message('REQUIRED')), return 0
+    $self->error($self->error_to_message('REQUIRED')), return 0
       if $self->required && $self->is_empty;
 
     return 1 if $self->is_empty;
@@ -164,9 +167,9 @@ sub is_valid {
     if (my $multiple = $self->multiple) {
         my ($min, $max) = @$multiple;
 
-        $self->error($self->_message('NOT_ENOUGH')), return 0
+        $self->error($self->error_to_message('NOT_ENOUGH')), return 0
           if @values < $min;
-        $self->error($self->_message('TOO_MUCH')), return 0
+        $self->error($self->error_to_message('TOO_MUCH')), return 0
           if defined $max ? @values > $max : $min != 1 && @values != $min;
     }
 
@@ -175,7 +178,7 @@ sub is_valid {
             my ($ok, $error) = $c->is_valid([@values]);
 
             unless ($ok) {
-                $self->error($self->_message($c->error, $error));
+                $self->error($self->error_to_message($c->error, $error));
                 return 0;
             }
         }
@@ -184,7 +187,7 @@ sub is_valid {
                 my ($ok, $error) = $c->is_valid($value);
 
                 unless ($ok) {
-                    $self->error($self->_message($c->error, $error));
+                    $self->error($self->error_to_message($c->error, $error));
                     return 0;
                 }
             }

@@ -29,6 +29,10 @@ sub BUILD {
     return $self;
 }
 
+sub messages { @_ > 1 ? $_[0]->{messages} = $_[1] : $_[0]->{messages} }
+sub trim     { @_ > 1 ? $_[0]->{trim}     = $_[1] : $_[0]->{trim} }
+sub explicit { @_ > 1 ? $_[0]->{explicit} = $_[1] : $_[0]->{explicit} }
+
 sub field {
     my $self = shift;
 
