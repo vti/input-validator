@@ -5,7 +5,7 @@ use warnings;
 
 use base 'Input::Validator::Base';
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 
 use Input::Validator::Bulk;
 use Input::Validator::Condition;
@@ -219,6 +219,19 @@ sub values {
 
     foreach my $field (CORE::values %{$self->{fields}}) {
         $values->{$field->name} = $field->value
+          if defined $field->value && !$field->error;
+    }
+
+    return $values;
+}
+
+sub all_values {
+    my $self = shift;
+
+    my $values = {};
+
+    foreach my $field (CORE::values %{$self->{fields}}) {
+        $values->{$field->name} = $field->value
           if defined $field->value;
     }
 
@@ -405,6 +418,13 @@ Check if there are any errors.
 Return a hash reference of validated values. Only registered fields are returned,
 that means that if some other values were passed to the C<validate> method they
 are ignored.
+
+=head2 C<all_values>
+
+    $validator->all_values;
+
+Return a hash reference of all values. Only registered fields are returned.
+Useful for displaying wrong values for user to reenter.
 
 =head1 DEVELOPMENT
 

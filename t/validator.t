@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 16;
+use Test::More tests => 17;
 
 use Input::Validator;
 
@@ -26,9 +26,10 @@ is_deeply($validator->values, {firstname => 'bar'});
 ok(!$validator->validate({}));
 is_deeply($validator->values, {});
 
-# Optional field is wrong, but value is kept (e.g. for displaying)
+# Optional field is wrong
 ok(!$validator->validate({firstname => 'foo', website => '12'}));
-is_deeply($validator->values, {firstname => 'foo', website => '12'});
+is_deeply($validator->values, {firstname => 'foo'});
+is_deeply($validator->all_values, {firstname => 'foo', website => '12'});
 
 $validator = Input::Validator->new;
 $validator->field('foo')->in(0, 1);
