@@ -3,6 +3,8 @@ Revision history for perl module Input::Validator
 0.001003 2011-07-05
 
  - Fixed callback custom error setting
+ - Keep wrong field's value
+ - Set custom error messages per field
 
 0.001002 2011-05-26
 
