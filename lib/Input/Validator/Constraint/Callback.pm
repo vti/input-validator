@@ -10,7 +10,27 @@ sub is_valid {
 
     my $cb = $self->args;
 
-    return $cb->($value);
+    my ($ok, $custom_error) = $cb->($value);
+    return $ok if $ok;
+
+    if (defined $custom_error) {
+        $self->error($custom_error);
+    }
+
+    return 0;
+}
+
+sub error {
+    my $self = shift;
+
+    unless (@_) {
+        return $self->{error} if defined $self->{error};
+        return $self->SUPER::error;
+    }
+
+    $self->{error} = $_[0];
+
+    return $self;
 }
 
 1;
@@ -46,6 +66,6 @@ Validates the constraint.
 
 =head1 SEE ALSO
 
-L<Input::Validator>, L<Input::Constraint>
+L<Input::Validator>, L<Input::Validator::Constraint>
 
 =cut
