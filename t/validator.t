@@ -26,9 +26,9 @@ is_deeply($validator->values, {firstname => 'bar'});
 ok(!$validator->validate({}));
 is_deeply($validator->values, {});
 
-# Optional field is wrong
+# Optional field is wrong, but value is kept (e.g. for displaying)
 ok(!$validator->validate({firstname => 'foo', website => '12'}));
-is_deeply($validator->values, {firstname => 'foo'});
+is_deeply($validator->values, {firstname => 'foo', website => '12'});
 
 $validator = Input::Validator->new;
 $validator->field('foo')->in(0, 1);

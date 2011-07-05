@@ -5,7 +5,7 @@ use warnings;
 
 use base 'Input::Validator::Base';
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 use Input::Validator::Bulk;
 use Input::Validator::Condition;
@@ -219,7 +219,7 @@ sub values {
 
     foreach my $field (CORE::values %{$self->{fields}}) {
         $values->{$field->name} = $field->value
-          if defined $field->value && !$field->error;
+          if defined $field->value;
     }
 
     return $values;
