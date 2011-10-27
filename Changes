@@ -1,5 +1,10 @@
 Revision history for perl module Input::Validator
 
+0.001005 2011-10-27
+
+ - Do not clear other messages when calling messages method on a field
+   (reported by Marcus Ramberg)
+
 0.001004 2011-07-05
 
  - Do not keep wrong values, there is a separate method "all_values" now

@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 72;
+use Test::More tests => 74;
 
 use_ok('Input::Validator::Field');
 
@@ -159,6 +159,15 @@ $field->value('Hi');
 ok(!$field->is_valid);
 is($field->error,
     'Name can have between 3 and 20 characters, you entered 2!');
+
+# Custom error messages inherit default messages
+$field = Input::Validator::Field->new(name => 'foo', messages => {REQUIRED => 'Required'});
+$field->required(1);
+$field->messages(LENGTH_CONSTRAINT_FAILED =>
+      'Name can have between %s and %s characters, you entered %s!');
+
+ok(!$field->is_valid);
+is($field->error, 'Required');
 
 # inflate
 $field = Input::Validator::Field->new(name => 'foo');

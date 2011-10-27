@@ -98,7 +98,11 @@ sub messages {
 
     my @messages = @_ == 1 ? %{$_[0]} : @_;
 
-    $self->{messages} = {@messages};
+    my %new_messages = @messages;
+
+    foreach my $message (keys %new_messages) {
+        $self->{messages}->{$message} = $new_messages{$message};
+    }
 
     return $self;
 }
