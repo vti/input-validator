@@ -96,13 +96,11 @@ sub messages {
 
     return $self->{messages} unless @_;
 
-    my @messages = @_ == 1 ? %{$_[0]} : @_;
-
-    my %new_messages = @messages;
-
-    foreach my $message (keys %new_messages) {
-        $self->{messages}->{$message} = $new_messages{$message};
-    }
+    my %messages = @_ == 1 ? %{$_[0]} : @_;
+	
+	my $old_messages = $self->{messages};
+	
+	$self->{messages} = { %$old_messages, %messages };
 
     return $self;
 }
