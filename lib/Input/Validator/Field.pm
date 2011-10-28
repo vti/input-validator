@@ -98,9 +98,9 @@ sub messages {
 
     my %messages = @_ == 1 ? %{$_[0]} : @_;
 	
-	my $old_messages = $self->{messages};
+    my $old_messages = $self->{messages};
 	
-	$self->{messages} = { %$old_messages, %messages };
+    $self->{messages} = { %$old_messages, %messages };
 
     return $self;
 }
