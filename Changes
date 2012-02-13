@@ -1,6 +1,6 @@
 Revision history for perl module Input::Validator
 
-0.001005 2011-10-27
+0.001005 2012-02-13
 
  - Do not clear other messages when calling messages method on a field
    (reported by Marcus Ramberg)
