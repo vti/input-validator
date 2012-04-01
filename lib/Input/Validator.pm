@@ -5,7 +5,7 @@ use warnings;
 
 use base 'Input::Validator::Base';
 
-our $VERSION = '0.001005';
+our $VERSION = '0.10';
 
 use Input::Validator::Bulk;
 use Input::Validator::Condition;
@@ -58,6 +58,12 @@ sub field {
     return $self->{fields}->{$names[0]} if @names == 1;
 
     return Input::Validator::Bulk->new(fields => $fields);
+}
+
+sub field_names {
+    my $self = shift;
+
+    return keys %{$self->{fields}};
 }
 
 sub when {
@@ -361,6 +367,12 @@ When an array or an array reference is passed return L<Input::Validator::Bulk> o
 call C<each> method to apply setting to multiple fields.
 
     $validator->field(qw/foo bar baz/)->each(sub { shift->required(1) });
+
+=head2 C<field_names>
+
+    my @names = $validator->field_names;
+
+Return registered field names.
 
 =head2 C<group>
 

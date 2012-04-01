@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 17;
+use Test::More tests => 18;
 
 use Input::Validator;
 
@@ -12,6 +12,7 @@ $validator->field('firstname')->required(1);
 $validator->field('website')->length(3, 20);
 
 is_deeply($validator->values, {});
+is_deeply([sort $validator->field_names], [qw/firstname website/]);
 
 # Ok
 ok($validator->validate({firstname => 'bar', website => 'http://fooo.com'}));
