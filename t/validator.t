@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 18;
+use Test::More tests => 21;
 
 use Input::Validator;
 
@@ -44,6 +44,13 @@ $validator = Input::Validator->new(messages => {REQUIRED => 'Required!'});
 $validator->field('firstname')->required(1);
 ok(!$validator->validate());
 is($validator->errors->{firstname}, 'Required!');
+
+$validator = Input::Validator->new(messages => {REQUIRED => 'Default required'});
+$validator->field('firstname')->required(1)->messages(REQUIRED => 'Custom required');
+$validator->field('lastname')->required(1);
+ok(!$validator->validate());
+is($validator->errors->{firstname}, 'Custom required');
+is($validator->errors->{lastname}, 'Default required');
 
 $validator = Input::Validator->new;
 $validator->field('firstname');
